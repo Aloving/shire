@@ -62,14 +62,13 @@
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes
 
 Описание и наименование роутов:
-/expense - 
 
 | Route | Information |
 | - | - |
 | /expense | Главный роут по взаимодествию с тратами |
-| /expenses/(create|remove|update|delete) | Возможные вариации роутов для взаимодействия с тратами |
+| /expenses/(create|read|update|delete) | Возможные вариации роутов для взаимодействия с тратами |
 | /incomes | Главный роут по взаимодествию с доходами |
-| /incomes/(create|remove|update|delete) | Роуты для взаимодействия с тратами |
+| /incomes/(create|read|update|delete) | Роуты для взаимодействия с тратами |
 
 Так-же нужно не забыть про роуты по которым можно будет получать сводку и прочую информацию, во время приступания к коду дописать в доке (!);
 
