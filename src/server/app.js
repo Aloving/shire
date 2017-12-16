@@ -13,7 +13,7 @@ const debug = require('debug');
 const path = require('path');
 const config = require('../../config/server');
 
-const port = process.env.PORT || config.port;
+const port = process.env.PORT || config.get('port');
 const root = `${__dirname}/../../`;
 
 // debug
