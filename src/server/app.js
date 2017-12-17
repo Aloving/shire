@@ -11,9 +11,10 @@ const koaStatic = require('koa-static');
 const logger = require('koa-logger');
 const debug = require('debug');
 const path = require('path');
+const jwt = require('koa-jwt');
 const config = require('../../config/server');
 
-const port = process.env.PORT || config.port;
+const port = process.env.PORT || config.get('port');
 const root = `${__dirname}/../../`;
 
 // debug
@@ -33,13 +34,11 @@ app
     map: { pug: 'pug' },
     extension: 'pug',
   }))
+  .use(jwt({ secret: config.get('secretkey') }).unless({
+    path: config.get('unprotectedUrls'),
+  }))
   .use(router.routes())
   .use(router.allowedMethods());
-
-app.on('error', async (err, ctx) => {
-  console.log(err);
-  logger.error('server error', err, ctx);
-});
 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
