@@ -101,7 +101,7 @@ patch | Обновление
 get | Получение
 post | Может использоваться в тех ситуациях когда не один из методов выше не подошел
 
-### Защищенные роуты
+#### Защищенные роуты
 В приложении существует механизм Защищенных роутов, защищенные роуты это роуты доступ к которым осуществляется только по jwt токену, который должен присутсвовать в хедере `Authorization` токен с префиксом `Bearer `,
 Пример: `'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MTUwOTczMTQsImV4cCI6MTU0NjYzMzMxNCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.dzbgLYNNSv76DZGYPOg_KFGg-jqIrfEDY1ZZP4bzYLM'`
 Пример `fetch` запроса:  https://gist.github.com/Aloving/f3b5232aeb6eade23ea80d384f3e39d7
@@ -171,6 +171,12 @@ class UserController extends BaseController {
 > Контроллер в некоторых случаях, когда это необходимо, экстендится от CRUD Controller;
 > Каждый контроллер обязательно должен покрывать свою зону ответственности, как писалось выше, ExpensesController может
 > отвечать только за работу с затратами.
+
+#### Механизм авторизации
+Пользователь регистрируется.
+Далее необходимо авторизоваться и получить токен.
+Затем с этим токеном пользователь получает доступ к защищенным урлам и может взаимодействовать с приложением.
+Пример `fetch` запроса:  https://gist.github.com/Aloving/f3b5232aeb6eade23ea80d384f3e39d7
 
 #### Модели
 Модели будут представлять слой взаимодействия с данными.
