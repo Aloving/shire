@@ -1,0 +1,10 @@
+{
+  "id": "test",
+  "$async": true,
+  "type": "object",
+  "properties": {
+    "kek": {
+      "type": "string"
+    }
+  }
+}
