@@ -4,3 +4,5 @@ const scheme = require('./scheme');
 const ajv = new Ajv();
 
 ajv.addSchema(scheme);
+
+module.exports = ajv;

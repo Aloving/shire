@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const config = require('../config');
+const config = require('../../../config/server');
 
-mongoose.Promise = global.Promise;
-mongoose.connect(config.get('mongoose:uri'),config.get('mongoose:options'));
+mongoose.connect(
+  config.get('mongoose.uri'),
+  config.get('mongoose.options'),
+);
 
 module.exports = mongoose;
