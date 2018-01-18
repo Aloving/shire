@@ -3,8 +3,14 @@ const mongoose = require('../utils/mongoose');
 const { Schema } = mongoose;
 
 const schema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
   operationType: {
     type: String,
+    enum: ['expense', 'income'],
     required: true,
   },
   title: {
@@ -20,11 +26,5 @@ const schema = new Schema({
     default: Date.now,
   },
 });
-
-const myModel = mongoose.model('Operation', schema);
-
-// function create() {
-//   myModel.create
-// }
 
 module.exports = mongoose.model('Operation', schema);

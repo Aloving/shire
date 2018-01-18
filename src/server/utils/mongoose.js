@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const config = require('../../../config/server');
 
+mongoose.set('debug', true);
+
 mongoose.connect(
   config.get('mongoose.uri'),
   config.get('mongoose.options'),
