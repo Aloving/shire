@@ -23,13 +23,13 @@ const schema = new Schema({
   },
 });
 
-schema.methods.setPassword = function setPassword(pass) {
+schema.methods.setPassword = function setPassword(password) {
   this.salt = crypto.randomBytes(16).toString('hex');
-  this.hash = crypto.pbkdf2Sync(pass, this.salt, 10000, 512, 'sha512').toString('hex');
+  this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
 };
 
-schema.methods.validPassword = function validPassword(pass) {
-  const hash = crypto.crypto.pbkdf2Sync(pass, this.salt, 10000, 512, 'sha512').toString('hex');
+schema.methods.validPassword = function validPassword(password) {
+  const hash = crypto.crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
   return this.hash === hash;
 };
 
