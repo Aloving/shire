@@ -2,11 +2,12 @@ const Koa = require('koa');
 
 const app = new Koa();
 
+const { passport } = require('./utils');
 const router = require('./routes');
 const views = require('koa-views');
 const json = require('koa-json');
 const onerror = require('koa-onerror');
-const bodyparser = require('koa-bodyparser');
+const koaBody = require('koa-body');
 const koaStatic = require('koa-static');
 const logger = require('koa-logger');
 const debug = require('debug');
@@ -25,8 +26,8 @@ onerror(app);
 
 // middlewares
 app
-  .use(bodyparser())
   .use(json())
+  .use(koaBody())
   .use(logger())
   .use(koaStatic(`${root}/static`))
   .use(views(`${root}/views`, {
@@ -34,9 +35,10 @@ app
     map: { pug: 'pug' },
     extension: 'pug',
   }))
-  .use(jwt({ secret: config.get('secretkey') }).unless({
-    path: config.get('unprotectedUrls'),
+  .use(jwt({ secret: config.get('jwt.secretkey') }).unless({
+    path: config.get('jwt.unprotectedUrls'),
   }))
+  .use(passport.initialize())
   .use(router.routes())
   .use(router.allowedMethods());
 

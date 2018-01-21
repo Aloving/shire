@@ -1,8 +1,8 @@
 const User = require('../models/User.model');
 
 class UserControllerModel {
-  static createUser({ login, password }) {
-    const user = new User({ login });
+  static createUser({ username, password }) {
+    const user = new User({ username });
     user.setPassword(password);
     return user.save();
   }
