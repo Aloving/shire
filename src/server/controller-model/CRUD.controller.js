@@ -10,8 +10,8 @@
   ]
 */
 class CRUDController {
-  contructor(model) {
-    this.model = model;
+  constructor(model) {
+    this.Model = model;
   }
   create() {}
   read() {}

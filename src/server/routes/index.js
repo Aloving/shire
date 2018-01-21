@@ -1,5 +1,6 @@
 const Router = require('koa-router');
-const auth = require('../controllers/AuthController');
+const auth = require('../controllers/Auth.controller');
+const userController = require('../controllers/User.controller');
 const { passport } = require('../utils');
 
 const router = new Router();
@@ -14,8 +15,14 @@ router.post('/token', async (ctx) => {
   ctx.body = auth.generateToken(payload);
 });
 
-router.post('/login', passport.authenticate('jwt', { session: false }), async (ctx) => {
-  ctx.body = ctx.state.user;
+router.post('/login', passport.authenticate('jwt', { session: false }), async (ctx, next) => {
+  const { username } = ctx.state.user;
+  try {
+    const user = await userController.findByUserName(username);
+    ctx.body = user.generateToken();
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;
