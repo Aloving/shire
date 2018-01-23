@@ -1,8 +1,12 @@
 module.exports = {
   users: [
     {
-      login: 'test',
+      username: 'test',
       password: 'test',
+    },
+    {
+      username: 'admin',
+      password: 'admin',
     },
   ],
   operations: [

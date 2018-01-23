@@ -1,18 +1,46 @@
 const mongoose = require('../../utils/mongoose');
-const data = require('./startdb');
+require('../../models/User.model');
+const { users } = require('./startdb');
 const User = require('../../controllers/User.controller');
 
-// async function start() {
-//   try {
-//     await User.createNewUser({
-//       username: 'testx',
-//       password: 'testx',
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-//
-// start();
+function open() {
+  return new Promise((resolve) => {
+    mongoose.connection.on('open', resolve);
+  });
+}
 
-User.findByUserName('testx').then(console.log)
+function dropDb() {
+  const { db } = mongoose.connection;
+  return new Promise(resolve => db.dropDatabase(resolve));
+}
+
+function requireModels() {
+  const promises = Object.keys(mongoose.models).map((modelName) => {
+    const mongoosePromise = mongoose.models[modelName].ensureIndexes();
+    return mongoosePromise;
+  });
+  return Promise.all(promises);
+}
+
+function createUsers() {
+  const promises = users.map((user) => {
+    const newUser = User.createNewUser(user);
+    return newUser;
+  });
+  return Promise.all(promises);
+}
+
+async function createDatabase() {
+  await createUsers();
+}
+
+try {
+  (async () => {
+    await open();
+    await dropDb();
+    await requireModels();
+    await createDatabase();
+  })();
+} catch (err) {
+  console.log(err);
+}
