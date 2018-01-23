@@ -1,4 +1,4 @@
-const CRUDController = require('./CRUD.controller');
+const CRUDController = require('./CRUD');
 
 class UserControllerModel extends CRUDController {
   async create({ username, password }) {

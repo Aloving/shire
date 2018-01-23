@@ -1,6 +1,6 @@
 const mongoose = require('../utils/mongoose');
 const crypto = require('crypto');
-const auth = require('../controllers/Auth.controller');
+const auth = require('../controllers/controller-module/Auth');
 
 const { Schema } = mongoose;
 

@@ -1,5 +1,5 @@
-const UserModel = require('../models/User.model');
-const UserControllerModel = require('../controller-model/User.controller-model');
+const UserModel = require('../../models/User.model');
+const UserControllerModel = require('../controller-model/User');
 
 class UserController extends UserControllerModel {
   createNewUser({ username, password }) {
