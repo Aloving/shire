@@ -25,13 +25,22 @@ const schema = new Schema({
   },
 });
 
-schema.methods.setPassword = function setPassword(password) {
+schema.methods.hashPassword = function hashPassword(password) {
+  const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+  return hash;
+};
+
+schema.methods.setSalt = function setSalt() {
   this.salt = crypto.randomBytes(16).toString('hex');
-  this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 256, 'sha256').toString('hex');
+};
+
+schema.methods.setPassword = function setPassword(password) {
+  this.setSalt();
+  this.hash = this.hashPassword(password);
 };
 
 schema.methods.validPassword = function validPassword(password) {
-  const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 256, 'sha256').toString('hex');
+  const hash = this.hashPassword(password);
   return this.hash === hash;
 };
 
