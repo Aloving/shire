@@ -66,8 +66,10 @@ schema.methods.validPassword = function validPassword(password) {
  * @return {String} Token
  */
 schema.methods.generateToken = function generateToken() {
+  /* eslint no-underscore-dangle: [2, { "allow": ["_id"] }] */
   return auth.generateToken({
     username: this.username,
+    id: this._id,
   });
 };
 

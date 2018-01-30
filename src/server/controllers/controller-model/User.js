@@ -8,7 +8,7 @@ class UserControllerModel extends CRUDController {
   /**
    * USER create method, method creates one user for each call
    * @param  {String}  username Username for new user
-   * @param  {[type]}  password Password for new user
+   * @param  {String}  password Password for new user
    * @return {Promise}
    */
   async create({ username, password }) {
