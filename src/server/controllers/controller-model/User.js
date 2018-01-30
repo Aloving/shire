@@ -27,8 +27,35 @@ class UserControllerModel extends CRUDController {
     return this.Model[method](query);
   }
 
-  update({ query, payload }) {
-    return this.Model.findOneAndUpdate(query)
+  /**
+   * USER update method
+   * @param  {String}  id User mongoose id
+   * @param  {Object}  payload Update payload
+   * @param  {String}  [payload.password] Password for update
+   * @param  {String}  [payload.username] Username for update
+   * @return {Promise}
+   */
+  async update({ id, payload: { password, username } = {} }) {
+    const user = await this.Model.findById(id);
+
+    if (username) {
+      user.username = username;
+    }
+
+    if (password) {
+      user.setPassword(password);
+    }
+
+    return user.save();
+  }
+
+  /**
+   * USER delete method
+   * @param  {String} id User mongoose id
+   * @return {Promise}
+   */
+  delete(id) {
+    return this.Model.remove({ _id: id });
   }
 }
 
