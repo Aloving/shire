@@ -2,6 +2,8 @@ const dirtyChai = require('dirty-chai');
 const Model = require('../User.model');
 const chai = require('chai');
 
+const Auth = require('../../controllers/controller-module/Auth');
+
 const { expect, should } = chai;
 
 should();
@@ -45,6 +47,14 @@ describe('User model', () => {
     it('setPassword', () => {
       instance.setPassword(userData.password);
       expect(instance.hash).to.exist();
+    });
+    it('generateToken', () => {
+      instance.username = userData.username;
+      instance.setPassword(userData.password);
+      const token = instance.generateToken();
+      const { username, id } = Auth.decodeToken(token);
+      username.should.be.equal(userData.username);
+      id.should.be.equal(instance._id.toString());
     });
     describe('hashPassword', () => {
       it('correct', () => {
