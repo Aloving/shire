@@ -10,6 +10,10 @@ const auth = {
   generateToken(payload) {
     return jwt.sign(payload, config.get('jwt.secretkey'));
   },
+
+  decodeToken(token) {
+    return jwt.verify(token, config.get('jwt.secretkey'));
+  },
 };
 
 module.exports = auth;
