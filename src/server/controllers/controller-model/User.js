@@ -11,7 +11,7 @@ class UserControllerModel extends CRUDController {
    * @param  {String}  password Password for new user
    * @return {Promise}
    */
-  async create({ username, password }) {
+  async create({ username, password } = {}) {
     const user = new this.Model({ username });
     user.setPassword(password);
     return user.save();
@@ -23,7 +23,7 @@ class UserControllerModel extends CRUDController {
    * @param  {String} [method='find' }] Which method
    * @return {Promise}
    */
-  read({ query, method = 'find' }) {
+  read({ query, method = 'find' } = {}) {
     return this.Model[method](query);
   }
 
