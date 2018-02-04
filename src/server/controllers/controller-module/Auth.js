@@ -11,6 +11,11 @@ const auth = {
     return jwt.sign(payload, config.get('jwt.secretkey'));
   },
 
+  /**
+   * Method for decode token
+   * @param  {String} token Input token
+   * @return {any}
+   */
   decodeToken(token) {
     return jwt.verify(token, config.get('jwt.secretkey'));
   },

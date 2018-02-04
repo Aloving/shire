@@ -12,7 +12,7 @@ class UserController extends UserControllerModel {
    * @param  {String} password Password for new user
    * @return {Promise}
    */
-  createNewUser({ username, password }) {
+  createNewUser({ username, password } = {}) {
     return this.create({ username, password });
   }
 

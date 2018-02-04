@@ -1,18 +1,9 @@
 const UserController = require('../User');
 const UserModel = require('../../../models/User.model');
-const chai = require('chai');
 const sinon = require('sinon');
 
-const { expect, should } = chai;
-
-const fs = require('fs');
-
 describe('"User" Controller-model', () => {
-  const userData = {
-    username: 'testx',
-    password: 'test',
-  };
-  let instance = null
+  let instance = null;
   beforeEach(() => {
     instance = new UserController(UserModel);
   });
@@ -60,35 +51,30 @@ describe('"User" Controller-model', () => {
       UserModel.findById.restore();
     });
 
-    it('without password', () => {
-      return instance.update({
-        id: 'test',
-        payload: {
-          username: 'test'
-        }
-      })
+    it('without password', () => instance.update({
+      id: 'test',
+      payload: {
+        username: 'test',
+      },
+    })
       .then(() => {
         sinon.assert.calledOnce(saveStub);
         sinon.assert.notCalled(setPasswordStub);
-      });
-    });
+      }));
 
-    it('with password', () => {
-      return instance.update({
-        id: 'test',
-        payload: {
-          username: 'test',
-          password: 'test'
-        }
-      })
+    it('with password', () => instance.update({
+      id: 'test',
+      payload: {
+        username: 'test',
+        password: 'test',
+      },
+    })
       .then(() => {
         sinon.assert.calledOnce(saveStub);
         sinon.assert.calledOnce(setPasswordStub);
-      });
-    })
+      }));
   });
   it('delete', () => {
-    const enh = UserModel;
     const removeStub = sinon.stub(UserModel, 'remove');
 
     instance.delete();
