@@ -22,7 +22,14 @@ const root = `${__dirname}/../../`;
 debug('koa2:server');
 
 // error handler
-onerror(app);
+onerror(app, {
+  json(err, ctx) {
+    ctx.body = {
+      success: false,
+      err,
+    };
+  },
+});
 
 // middlewares
 app

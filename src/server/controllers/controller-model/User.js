@@ -15,6 +15,15 @@ class UserControllerModel extends CRUDController {
     const user = new this.Model({ username });
     user.setPassword(password);
     return user.save();
+    // user.save().then(res => {
+    //   console.log('res')
+    //   console.log('res')
+    //   console.log(res)
+    // }).catch(err => {
+    //   console.log('err')
+    //   console.log('err')
+    //   console.log(err)
+    // })
   }
 
   /**

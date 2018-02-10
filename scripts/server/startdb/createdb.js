@@ -1,7 +1,7 @@
-const mongoose = require('../../utils/mongoose');
-require('../../models/User.model');
+const mongoose = require('../../../src/server/utils/mongoose');
+require('../../../src/server/models/User.model');
 const { users } = require('./startdb');
-const User = require('../../controllers/controller-module/User');
+const User = require('../../../src/server/controllers/controller-module/User');
 
 /**
  * Opens connection to db

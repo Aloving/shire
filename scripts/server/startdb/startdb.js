@@ -5,6 +5,10 @@ module.exports = {
       password: 'test',
     },
     {
+      username: 'test',
+      password: 'test',
+    },
+    {
       username: 'admin',
       password: 'admin',
     },

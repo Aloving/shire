@@ -59,6 +59,7 @@
   },
   "scripts": {
     "start": "node ./src/server/app.js",
+    "start:node:watch": "nodemon ./src/server/app.js",
     "startboth": "node ./src/server/app.js && node scripts/client/start.js",
     "build": "node scripts/client/build.js",
     "test": "node scripts/client/test.js --env=jsdom",
