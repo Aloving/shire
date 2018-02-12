@@ -13,6 +13,7 @@ const logger = require('koa-logger');
 const debug = require('debug');
 const path = require('path');
 const jwt = require('koa-jwt');
+const onsuccess = require('./utils/onsuccess');
 const config = require('../../config/server');
 
 const port = process.env.PORT || config.get('port');
@@ -30,6 +31,8 @@ onerror(app, {
     };
   },
 });
+
+onsuccess(app);
 
 // middlewares
 app

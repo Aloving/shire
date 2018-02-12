@@ -5,7 +5,7 @@ const AuthModule = require('../controller-module/Auth');
 const routeController = {
   async token(ctx) {
     const payload = _.get(ctx, 'request.body');
-    ctx.body = AuthModule.generateToken(payload);
+    ctx.onsuccess(AuthModule.generateToken(payload));
   },
 
   async login(ctx) {
@@ -14,7 +14,7 @@ const routeController = {
       const user = await UserModule.findByUserName(username);
       ctx.body = user.generateToken();
     } catch (err) {
-      ctx.onerror(err.toJSON());
+      ctx.onerror(err);
     }
   },
 
@@ -24,7 +24,6 @@ const routeController = {
       const response = await UserModule.createNewUser(body);
       ctx.body = response;
     } catch (err) {
-      // ctx.onerror(err.toJSON());
       ctx.onerror(err);
     }
   },
